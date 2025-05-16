@@ -1,6 +1,8 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import {BehaviorSubject} from "rxjs";
-import {
+import firebase from "firebase/compat";
+
+import  {
   Auth,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
@@ -13,9 +15,8 @@ import {
   providedIn: 'root'
 })
 export class AuthService {
-
   private userSubject = new BehaviorSubject<User | null>(null);
-  currentUser$ = this.userSubject.asObservable();
+  currentUser = this.userSubject.asObservable();
 
   constructor(private auth: Auth) {
     onAuthStateChanged(this.auth, user => {

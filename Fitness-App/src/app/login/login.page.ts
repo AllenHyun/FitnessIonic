@@ -1,31 +1,21 @@
-import {Component, inject, OnInit, ProviderToken} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {
-  IonButton,
-  IonContent,
-  IonHeader,
-  IonInput,
-  IonItem,
-  IonLabel, IonList,
-  IonTitle,
-  IonToolbar
-} from '@ionic/angular/standalone';
+import {IonicModule} from "@ionic/angular";
 import {Router} from "@angular/router";
-import * as console from "node:console";
+import {AuthService} from "../services/auth.service";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonLabel, IonButton, IonInput, IonItem, ReactiveFormsModule, IonList]
+  imports: [IonicModule, ReactiveFormsModule]
 })
-export class LoginPage{
+export class LoginPage {
 
   private fb = inject(FormBuilder);
-  private UserAuthService: ProviderToken<unknown>;
-  private authService = inject(this.UserAuthService);
+  private userauthService = inject(AuthService);
   private router = inject(Router);
 
   form: FormGroup;
@@ -42,14 +32,13 @@ export class LoginPage{
     const { email, password } = this.form.value;
 
     try {
-      await this.authService.register(email, password);
+      await this.userauthService.register(email, password);
       this.router.navigate(['/']);
 
     } catch (err) {
       console.error('Register error:', err);
     }
   }
-
 
 
 }
