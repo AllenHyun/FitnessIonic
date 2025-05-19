@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/rutinas"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detalle</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" *ngIf="rutina">
+  <h2>{{ rutina.description }}</h2>
+  <p><strong>Duración:</strong> {{ rutina.duration }}</p>
+
+  <ion-list>
+    <ion-item *ngFor="let ejercicio of rutina.exercises">
+      <ion-label>
+        <h3>{{ ejercicio.name }}</h3>
+        <p>{{ ejercicio.reps }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
