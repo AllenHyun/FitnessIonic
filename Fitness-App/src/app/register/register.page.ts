@@ -6,13 +6,13 @@ import {Router} from "@angular/router";
 import {AuthService} from "../services/auth.service";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss'],
+  selector: 'app-register',
+  templateUrl: 'register.page.html',
+  styleUrls: ['register.page.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, IonicModule]
+  imports: [IonicModule, ReactiveFormsModule]
 })
-export class LoginPage  {
+export class RegisterPage {
 
   private fb = inject(FormBuilder);
   private userauthService = inject(AuthService);
@@ -24,20 +24,21 @@ export class LoginPage  {
 
     this.form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]]
+      password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 
-  async login() {
+  async register() {
     const { email, password } = this.form.value;
 
     try {
-      await this.userauthService.login(email, password);
+      await this.userauthService.register(email, password);
       this.router.navigate(['/']);
 
     } catch (err) {
-      console.error('Login error:', err);
+      console.error('Register error:', err);
     }
   }
+
 
 }

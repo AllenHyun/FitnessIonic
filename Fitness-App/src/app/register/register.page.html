@@ -1,12 +1,13 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Login</ion-title>
+    <ion-title>Register</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <form [formGroup]="form" (ngSubmit)="login()">
+  <form [formGroup]="form" (ngSubmit)="register()">
     <ion-list>
+
       <ion-item>
         <ion-label position="floating">Email</ion-label>
         <ion-input type="email" formControlName="email"></ion-input>
@@ -18,6 +19,8 @@
       </ion-item>
     </ion-list>
 
-    <ion-button expand="block" type="submit" [disabled]="form.invalid">Login</ion-button>
+    <ion-button expand="block" type="submit" [disabled]="form.invalid">
+      Create Account
+    </ion-button>
   </form>
 </ion-content>
