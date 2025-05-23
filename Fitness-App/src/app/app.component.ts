@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
+import {SqliteDatabaseService} from "./services/sqlite-database.service";
 import { DesplegableComponent} from "./desplegable/desplegable.component";
 
 @Component({
@@ -9,5 +10,9 @@ import { DesplegableComponent} from "./desplegable/desplegable.component";
   standalone: true
 })
 export class AppComponent {
-  constructor() {}
+  constructor(private db: SqliteDatabaseService) {
+    this.db.initDatabase();
+  }
+
+
 }

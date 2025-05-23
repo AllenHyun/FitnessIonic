@@ -25,10 +25,9 @@ export const routes: Routes = [
   {
     path: 'routine-detail/:id',
     loadComponent: () => import('./routine-detail/routine-detail.page').then( m => m.RoutineDetailPage)
-  },{
-    path: 'routine-detail',
-    loadComponent: () => import('./routine-detail/routine-detail.page').then( m => m.RoutineDetailPage)
   },
-
-
+  {
+    path: 'favorites',
+    loadComponent: () => import('./favorites/favorites.component').then( m => m.FavoritesComponent)
+  },
 ];

@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/rutinas"></ion-back-button>
+      <ion-back-button defaultHref="/routine-list"></ion-back-button>
     </ion-buttons>
     <ion-title>Detalle</ion-title>
   </ion-toolbar>
@@ -20,3 +20,7 @@
     </ion-item>
   </ion-list>
 </ion-content>
+<ion-button expand="block" (click)="toggleFavorite()" color="danger">
+  {{ isFavorite ? 'Quitar de favoritos ❤️' : 'Añadir a favoritos 🤍' }}
+</ion-button>
+
