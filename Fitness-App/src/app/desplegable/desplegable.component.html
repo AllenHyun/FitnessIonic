@@ -1,9 +1,12 @@
 <ion-menu side="start" menuId="main-menu" contentId="main-content">
   <ion-header>
     <ion-toolbar>
-      <ion-title>Menú</ion-title>
+      <ion-title>
+        Hello{{ userName ? ', ' + userName : '' }}
+      </ion-title>
     </ion-toolbar>
   </ion-header>
+
 
   <ion-content>
     <ion-list>
@@ -16,6 +19,12 @@
       <ion-menu-toggle auto-hide="false">
         <ion-item routerLink="/favorites">
           Favoritos
+        </ion-item>
+      </ion-menu-toggle>
+
+      <ion-menu-toggle auto-hide="false">
+        <ion-item routerLink="/profile">
+          Profile
         </ion-item>
       </ion-menu-toggle>
 

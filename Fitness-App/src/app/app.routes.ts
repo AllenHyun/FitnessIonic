@@ -30,4 +30,5 @@ export const routes: Routes = [
     path: 'favorites',
     loadComponent: () => import('./favorites/favorites.component').then( m => m.FavoritesComponent)
   },
+
 ];

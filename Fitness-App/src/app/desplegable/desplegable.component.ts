@@ -19,6 +19,8 @@ import {Capacitor} from "@capacitor/core";
 import {StatusBar, Style} from "@capacitor/status-bar";
 import {filter} from "rxjs";
 
+import { Firestore, collection, query, where, getDocs } from '@angular/fire/firestore';
+
 @Component({
   selector: 'app-desplegable',
   templateUrl: 'desplegable.component.html',
@@ -29,18 +31,31 @@ import {filter} from "rxjs";
 export class DesplegableComponent {
   user: User | null = null;
   pageTitle: string = 'Menu';
-
+  userName: string | null = null;
   constructor(
     private authService: AuthService,
     private router: Router,
+    private firestore: Firestore,
   ) {
     if(Capacitor.getPlatform() !== 'web'){
       StatusBar.setOverlaysWebView({overlay: false});
       StatusBar.setStyle({style: Style.Light});
     }
 
-    this.authService.currentUser.subscribe(user => {
+    this.authService.currentUser.subscribe(async user => {
       this.user = user;
+      if(user?.email){
+        const usersRef = collection(this.firestore, 'users');
+        const q = query(usersRef, where('email', '==', user.email));
+        const querySnapshot = await getDocs(q);
+        if(!querySnapshot.empty){
+          this.userName = querySnapshot.docs[0].data()['name'] || null;
+        } else {
+          this.userName = null;
+        }
+      } else {
+        this.userName = null;
+      }
     });
 
     this.router.events
