@@ -12,7 +12,7 @@ import {
   IonToolbar
 } from '@ionic/angular/standalone';
 import {RutineLoadService} from "../services/rutine-load.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {SqliteDatabaseService} from "../services/sqlite-database.service";
 
 @Component({
@@ -24,34 +24,31 @@ import {SqliteDatabaseService} from "../services/sqlite-database.service";
 })
 export class RoutineDetailPage implements OnInit {
   rutina: any;
-  isFavorite = false;
+  isFavorite: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
-    private firebaseService: RutineLoadService,
+    private rutineService: RutineLoadService,
     private dbService: SqliteDatabaseService,
-    private router: Router
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.firebaseService.getRutineById(id).subscribe(data => {
-        this.rutina = data;
+      this.rutineService.getRutineById(id).subscribe(rutina => {
+        this.rutina = rutina;
       });
-    }
-    if (this.rutina?.id) {
-      this.dbService.isFavorite(this.rutina.id).then(fav => {
-        this.isFavorite = fav ?? false;
-      });
+      this.isFavorite = await this.dbService.isFavorite(id);
     }
   }
 
-  toggleFavorite() {
+  async toggleFavorite() {
+    if (!this.rutina || !this.rutina.id) return;
+
     if (this.isFavorite) {
-      this.dbService.removeFavorite(this.rutina.id);
+      await this.dbService.removeFavorite(this.rutina.id);
     } else {
-      this.dbService.addFavorite(this.rutina.id);
+      await this.dbService.addFavorite(this.rutina.id);
     }
     this.isFavorite = !this.isFavorite;
   }

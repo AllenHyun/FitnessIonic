@@ -3,17 +3,21 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Rutinas</ion-title>
+    <ion-title>Mis Favoritos</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
   <div class="grid">
-    <ion-card class="card" *ngFor="let rutina of rutinas" (click)="goToDetail(rutina.id)">
+    <ion-card *ngFor="let rutina of favoritas" class="card" (click)="goToDetail(rutina.id)">
       <img [src]="rutina.imageUrl" alt="Imagen rutina" />
       <ion-card-header class="title">
         <ion-card-title>{{ rutina.name }}</ion-card-title>
       </ion-card-header>
     </ion-card>
   </div>
+
+  <p *ngIf="favoritas.length === 0" style="text-align:center; color: #888;">
+    No tienes rutinas favoritas aún.
+  </p>
 </ion-content>

@@ -37,7 +37,7 @@ export class RoutineListPage implements OnInit {
   loadRutines() {
     this.routineService.getRutines().subscribe(data => {
       this.rutinas = data;
-      this.loadImages();
+      this.loadImages(); // una vez cargadas las rutinas, cargar imágenes
     });
   }
 
