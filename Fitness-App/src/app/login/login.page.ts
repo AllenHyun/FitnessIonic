@@ -33,7 +33,7 @@ export class LoginPage  {
 
     try {
       await this.userauthService.login(email, password);
-      this.router.navigate(['/']);
+      this.router.navigate(['routine-list']);
 
     } catch (err) {
       console.error('Login error:', err);
