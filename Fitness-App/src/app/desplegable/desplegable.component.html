@@ -4,9 +4,11 @@
       <ion-title>
         Hello{{ userName ? ', ' + userName : '' }}
       </ion-title>
+      <ion-buttons slot="end">
+        <ion-button fill="clear" size="small" (click)="presentEditNamePrompt()">Edit</ion-button>
+      </ion-buttons>
     </ion-toolbar>
   </ion-header>
-
 
   <ion-content>
     <ion-list>
